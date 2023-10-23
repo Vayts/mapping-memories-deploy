@@ -13,6 +13,7 @@ import { join } from 'path';
 import { CityModule } from '../city/city.module';
 import { MemorialModule } from '../memorial/memorial.module';
 import { MemorialTypeModule } from '../memorialType/memorialType.module';
+import { CoreModule } from '../core/core.module';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { MemorialTypeModule } from '../memorialType/memorialType.module';
       serveRoot: '/img',
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../..', 'client'),
+      rootPath: join(__dirname, '../../..', 'client/dist'),
       exclude: ['/api/(.*)'],
     }),
     ConfigModule.forRoot(),
@@ -34,6 +35,7 @@ import { MemorialTypeModule } from '../memorialType/memorialType.module';
     CityModule,
     MemorialModule,
     MemorialTypeModule,
+    CoreModule,
   ],
   controllers: [AppController],
   providers: [AppService],
