@@ -13,27 +13,29 @@ import { join } from 'path';
 import { CityModule } from '../city/city.module';
 import { MemorialModule } from '../memorial/memorial.module';
 import { MemorialTypeModule } from '../memorialType/memorialType.module';
+import { CoreModule } from '../core/core.module';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../..', 'client/public/img'),
+      rootPath: join(__dirname, '../../../..', 'client/public/img'),
       exclude: ['/api/(.*)'],
       serveRoot: '/img',
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../..', 'client'),
+      rootPath: join(__dirname, '../../..', 'client/dist'),
       exclude: ['/api/(.*)'],
     }),
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGO_URI),
-    MapModule,
+    CoreModule,
     FileModule,
-    PublicationModule,
     AuthModule,
+    MapModule,
     CityModule,
     MemorialModule,
     MemorialTypeModule,
+    PublicationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
