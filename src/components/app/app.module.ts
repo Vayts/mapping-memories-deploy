@@ -18,12 +18,12 @@ import { CoreModule } from '../core/core.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../../..', 'client/public/img'),
+      rootPath: join(__dirname, '../../..', 'client/public/img'),
       exclude: ['/api/(.*)'],
       serveRoot: '/img',
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../..', 'client/dist'),
+      rootPath: join(__dirname, '../../..', 'client'),
       exclude: ['/api/(.*)'],
     }),
     ConfigModule.forRoot(),
