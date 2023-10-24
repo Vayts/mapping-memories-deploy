@@ -5,7 +5,6 @@ import {
   Get,
   Param,
   Post,
-  Put,
   Query,
   UploadedFiles,
   UseGuards,
@@ -16,7 +15,6 @@ import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { CreateInterviewDTO } from '../../dto/createInterview.dto';
 import { JwtAuthGuard } from '../../guards/jwtAuth.guard';
 import { ROUTES } from '../../constants/routes';
-import { ValidPublicationIdGuard } from '../../guards/ValidPublicationId.guard';
 
 @Controller(ROUTES.PUBLICATION.DEFAULT)
 export class PublicationController {
@@ -58,26 +56,17 @@ export class PublicationController {
     return this.publicationService.getPublications(limit, search, type);
   }
 
-  @Get(ROUTES.PUBLICATION.LOAD_MORE)
-  getFirstLoadPublications(
-    @Query('limit') limit = 9,
-    @Query('search') search = '',
-    @Query('type') type = '',
-  ) {
-    return this.publicationService.loadMorePublications(limit, search, type);
-  }
-
   @Get(ROUTES.PUBLICATION.GET_CURRENT)
   getPublication(@Param('id') id) {
     return this.publicationService.getPublication(id);
   }
 
-  @Put(ROUTES.PUBLICATION.SET_FAVORITE)
+  @Get(ROUTES.PUBLICATION.SET_FAVORITE)
   setFavoritePublication(@Param('id') id) {
     return this.publicationService.setFavoritePublication(id);
   }
 
-  @Put(ROUTES.PUBLICATION.REMOVE_FAVORITE)
+  @Get(ROUTES.PUBLICATION.REMOVE_FAVORITE)
   removeFavoritePublication(@Param('id') id) {
     return this.publicationService.removeFavoritePublication(id);
   }
@@ -87,10 +76,14 @@ export class PublicationController {
     return this.publicationService.getAllPublications(search);
   }
 
-  @Get(ROUTES.PUBLICATION.GET_ADDITIONAL)
-  @UseGuards(ValidPublicationIdGuard)
-  getAdditionalPublication(@Query('publication_id') except = '') {
-    return this.publicationService.getAdditionalPublications(except);
+  @Get(ROUTES.PUBLICATION.GET_FAVORITE)
+  getFavoritePublication(@Query('type') type = '') {
+    return this.publicationService.getFavoritePublication(type);
+  }
+
+  @Get(ROUTES.PUBLICATION.GET_RECENT)
+  getRecentPublication(@Query('except') except = '') {
+    return this.publicationService.getRecentPublications(except);
   }
 
   @Delete(ROUTES.PUBLICATION.DELETE)

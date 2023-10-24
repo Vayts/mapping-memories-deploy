@@ -1,13 +1,12 @@
 import { Controller, Get, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { FileService } from './file.service';
-import { ROUTES } from '../../constants/routes';
 
-@Controller(ROUTES.FILE.DEFAULT)
+@Controller('file')
 export class FileController {
   constructor(private photoService: FileService) {}
 
-  @Get(ROUTES.FILE.DOWNLOAD_PHOTO)
+  @Get('/download/photo')
   async downloadPhoto(@Query() query, @Res() res: Response) {
     try {
       const photoData = await this.photoService.downloadFileFromAws(
@@ -21,7 +20,7 @@ export class FileController {
     }
   }
 
-  @Get(ROUTES.FILE.DOWNLOAD_PDF)
+  @Get('/download/pdf')
   async downloadFile(@Query() query, @Res() res: Response) {
     try {
       const fileData = await this.photoService.downloadFileFromAws(

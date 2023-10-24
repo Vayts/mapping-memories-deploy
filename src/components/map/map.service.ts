@@ -42,11 +42,11 @@ export class MapService {
       },
     ]);
     const cities = await this.getCities(filters);
-    const memorialTypes = await this.getTypes();
+    const types = await this.getTypes();
     return {
       memorials,
       cities,
-      memorialTypes,
+      types,
     };
   }
 
