@@ -119,8 +119,6 @@ export class PublicationService {
     ];
     const favoritePublications = await this.getFavoritePublication(type);
     const publications = await this.publicationModel.aggregate(pipeline);
-    
-    console.log(publications)
 
     return {
       favoritePublications,
